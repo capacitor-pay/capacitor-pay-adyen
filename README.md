@@ -1,14 +1,14 @@
 # capacitor-pay-adyen
 
-Adyen provider plugin for [`capacitor-pay`](https://github.com/Spanu18/capacitor-pay), wrapping Adyen's **Tap to Pay** SDKs for iOS and Android. Turns the phone itself into the card terminal (NFC) - no external card reader hardware needed. Can also be used standalone without `capacitor-pay`.
+Adyen provider plugin for [`@capacitor-pay/core`](https://github.com/capacitor-pay/capacitor-pay), wrapping Adyen's **Tap to Pay** SDKs for iOS and Android. Turns the phone itself into the card terminal (NFC) - no external card reader hardware needed. Can also be used standalone without `@capacitor-pay/core`.
 
 ## ⚠️ Verification status
 
-This is the least-verified of the three `capacitor-pay-*` plugins:
+This is the least-verified of the three `@capacitor-pay/*` plugins:
 
-- `capacitor-pay-sumup` was compiled and verified against the real SumUp SDK (javap-checked).
-- `capacitor-pay-stripe` was written against documented Stripe Terminal SDK patterns but not compiled (no cached artifacts available).
-- **`capacitor-pay-adyen` was written against general Adyen Tap to Pay integration patterns** (configuration object → initialize → activate → process a Terminal API payment request → get a Terminal API response). Adyen's Tap to Pay SDKs are less consistently documented in public sources than Stripe Terminal's, so confidence in the exact native API surface is **lower** than for the Stripe plugin.
+- `@capacitor-pay/sumup` was compiled and verified against the real SumUp SDK (javap-checked).
+- `@capacitor-pay/stripe` was written against documented Stripe Terminal SDK patterns but not compiled (no cached artifacts available).
+- **`@capacitor-pay/adyen` was written against general Adyen Tap to Pay integration patterns** (configuration object → initialize → activate → process a Terminal API payment request → get a Terminal API response). Adyen's Tap to Pay SDKs are less consistently documented in public sources than Stripe Terminal's, so confidence in the exact native API surface is **lower** than for the Stripe plugin.
 
 What you can rely on as-is: the **TypeScript layer** (`src/`) builds and type-checks cleanly, and the **Terminal API (Nexo) JSON** built/parsed in the native `buildPaymentRequest`/`parsePaymentResponse` helpers - `SaleToPOIRequest`/`SaleToPOIResponse` with `MessageHeader`/`PaymentRequest`/`PaymentResponse`/`POIData` - which is a stable, documented protocol shared across all of Adyen's POS terminals and Tap to Pay SDKs.
 
@@ -21,7 +21,7 @@ What needs verification against a real Adyen Tap to Pay integration (sample app 
 
 Treat this plugin as an architectural skeleton (TS API, plugin registration, Terminal API request/response shapes, setup/activation/checkout flow) to fill in against a real Adyen test account, the same way `capacitor-pay-sumup/test-app` was used to iron out the SumUp plugin's compile errors.
 
-## How this differs from `capacitor-pay-sumup` / `capacitor-pay-stripe`
+## How this differs from `@capacitor-pay/sumup` / `@capacitor-pay/stripe`
 
 There's no separate "discover/connect a reader" step - the phone *is* the reader. The flow is:
 
@@ -33,7 +33,7 @@ There's no separate "discover/connect a reader" step - the phone *is* the reader
 ## Install
 
 ```bash
-npm install capacitor-pay-adyen
+npm install @capacitor-pay/adyen
 npx cap sync
 ```
 
@@ -54,7 +54,7 @@ Pass this endpoint's URL as `sdkDataUrl` in `setup()`. The plugin calls it itsel
 Add to your `ios/App/Podfile`:
 
 ```ruby
-pod 'CapacitorPayAdyen', :path => '../../node_modules/capacitor-pay-adyen'
+pod 'CapacitorPayAdyen', :path => '../../node_modules/@capacitor-pay/adyen'
 ```
 
 Then run `pod install`. **If this fails to resolve `Adyen/TapToPay`** (see verification status above), add Adyen's iOS SDK as a Swift Package Manager dependency to your Xcode project directly instead, following Adyen's Tap to Pay on iPhone integration guide.
@@ -69,7 +69,7 @@ Then run `pod install`. **If this fails to resolve `Adyen/TapToPay`** (see verif
 
 The Tap to Pay for Android SDK may require a separate Adyen-hosted Maven repository (see the `NOTE:` in `android/build.gradle`) - check Adyen's integration guide for the URL and add it to your app's repositories if `mavenCentral()` alone doesn't resolve the dependency.
 
-Like the other `capacitor-pay-*` plugins, consuming apps need core library desugaring enabled in `android/app/build.gradle`:
+Like the other `@capacitor-pay/*` plugins, consuming apps need core library desugaring enabled in `android/app/build.gradle`:
 
 ```groovy
 android {

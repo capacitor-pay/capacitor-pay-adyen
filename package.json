@@ -1,5 +1,5 @@
 {
-  "name": "capacitor-pay-adyen",
+  "name": "@capacitor-pay/adyen",
   "version": "0.0.1",
   "description": "Capacitor plugin wrapping Adyen's Tap to Pay SDK for in-app NFC card payments. Adyen provider for capacitor-pay.",
   "main": "dist/plugin.cjs.js",
@@ -17,7 +17,7 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Spanu18/capacitor-pay-adyen.git"
+    "url": "git+https://github.com/capacitor-pay/capacitor-pay-adyen.git"
   },
   "keywords": [
     "capacitor",
