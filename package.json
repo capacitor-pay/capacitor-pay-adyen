@@ -1,0 +1,53 @@
+{
+  "name": "capacitor-pay-adyen",
+  "version": "0.0.1",
+  "description": "Capacitor plugin wrapping Adyen's Tap to Pay SDK for in-app NFC card payments. Adyen provider for capacitor-pay.",
+  "main": "dist/plugin.cjs.js",
+  "module": "dist/esm/index.js",
+  "types": "dist/esm/index.d.ts",
+  "unpkg": "dist/plugin.js",
+  "files": [
+    "dist/",
+    "ios/Plugin/",
+    "CapacitorPayAdyen.podspec",
+    "android/src/main/",
+    "android/build.gradle"
+  ],
+  "author": "Alessio Spanu",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Spanu18/capacitor-pay-adyen.git"
+  },
+  "keywords": [
+    "capacitor",
+    "plugin",
+    "native",
+    "adyen",
+    "tap-to-pay",
+    "payments"
+  ],
+  "scripts": {
+    "build": "npm run clean && tsc && rollup -c rollup.config.mjs",
+    "clean": "rimraf ./dist",
+    "watch": "tsc --watch",
+    "prepublishOnly": "npm run build"
+  },
+  "devDependencies": {
+    "@capacitor/core": "^8.1.0",
+    "rimraf": "^6.0.1",
+    "rollup": "^4.30.1",
+    "typescript": "~5.6.3"
+  },
+  "peerDependencies": {
+    "@capacitor/core": ">=7.0.0"
+  },
+  "capacitor": {
+    "ios": {
+      "src": "ios"
+    },
+    "android": {
+      "src": "android"
+    }
+  }
+}
